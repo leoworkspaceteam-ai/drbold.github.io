@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DR. BOLD — 23 Flavors. Zero Explanations.</title>
+<meta name="description" content="One of a kind. Just like you. 23 flavors. Zero compromises. Find your flavor.">
+<meta name="keywords" content="unique soda, best soft drinks, bold flavor, 23 flavors, craft soda">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --burgundy: #5C0A14;
+    --deep-red: #8B1A1A;
+    --crimson: #C0392B;
+    --cream: #F5ECD7;
+    --warm-white: #FDF8F0;
+    --dark: #0D0507;
+    --metallic: #C9A96E;
+    --metallic-light: #E8D5A3;
+    --text-muted: #8A7060;
+    --shadow: rgba(92, 10, 20, 0.4);
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dark);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom Cursor */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--crimson);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9999;
+    transition: transform 0.1s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--metallic);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9998;
+    transition: all 0.15s ease;
+    mix-blend-mode: difference;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 1000;
+    padding: 20px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: linear-gradient(to bottom, rgba(13,5,7,0.95) 0%, transparent 100%);
+    backdrop-filter: blur(2px);
+    transition: all 0.3s ease;
+  }
+  nav.scrolled {
+    background: rgba(13,5,7,0.97);
+    padding: 14px 48px;
+    border-bottom: 1px solid rgba(192,57,43,0.2);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 4px;
+    color: var(--cream);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--crimson); }
+  .nav-links {
+    display: flex; gap: 36px; list-style: none;
+  }
+  .nav-links a {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--text-muted); text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--cream); }
+  .nav-cta {
+    background: var(--crimson);
+    color: white; border: none;
+    padding: 10px 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: none; transition: all 0.3s ease;
+  }
+  .nav-cta:hover { background: var(--deep-red); transform: translateY(-1px); }
+
+  /* HERO */
+  #hero {
+    height: 100vh; min-height: 700px;
+    position: relative; overflow: hidden;
+    display: flex; align-items: center;
+    background: radial-gradient(ellipse at 60% 50%, #3D0810 0%, #0D0507 70%);
+  }
+  .hero-noise {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 200px;
+    pointer-events: none;
+  }
+  .hero-glow {
+    position: absolute; right: 8%; top: 50%;
+    transform: translateY(-50%);
+    width: min(600px, 55vw); height: min(600px, 55vw);
+    background: radial-gradient(circle, rgba(192,57,43,0.25) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: pulse-glow 4s ease-in-out infinite;
+  }
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.6; transform: translateY(-50%) scale(1); }
+    50% { opacity: 1; transform: translateY(-50%) scale(1.08); }
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: 0 8% 0 8%;
+    max-width: 650px;
+  }
+  .hero-eyebrow {
+    font-size: 10px; letter-spacing: 5px; text-transform: uppercase;
+    color: var(--metallic); margin-bottom: 24px;
+    display: flex; align-items: center; gap: 16px;
+    opacity: 0; animation: fade-up 0.8s 0.3s forwards;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 32px; height: 1px; background: var(--metallic);
+  }
+  .hero-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 9vw, 130px);
+    line-height: 0.92;
+    letter-spacing: 2px;
+    color: var(--cream);
+    opacity: 0; animation: fade-up 0.8s 0.5s forwards;
+  }
+  .hero-headline em {
+    font-style: italic;
+    font-family: 'Playfair Display', serif;
+    color: var(--crimson);
+    font-size: 0.85em;
+  }
+  .hero-sub {
+    font-size: 15px; letter-spacing: 1px;
+    color: var(--text-muted); margin-top: 20px;
+    line-height: 1.7;
+    opacity: 0; animation: fade-up 0.8s 0.7s forwards;
+  }
+  .hero-ctas {
+    display: flex; gap: 16px; margin-top: 40px; flex-wrap: wrap;
+    opacity: 0; animation: fade-up 0.8s 0.9s forwards;
+  }
+  .btn-primary {
+    background: var(--crimson);
+    color: white; border: none;
+    padding: 16px 36px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    cursor: none; transition: all 0.3s ease;
+    position: relative; overflow: hidden;
+  }
+  .btn-primary::after {
+    content: ''; position: absolute; inset: 0;
+    background: white; opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .btn-primary:hover::after { opacity: 0.08; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(192,57,43,0.4); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--cream); border: 1px solid rgba(245,236,215,0.3);
+    padding: 16px 36px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    cursor: none; transition: all 0.3s ease;
+  }
+  .btn-ghost:hover { border-color: var(--cream); transform: translateY(-2px); }
+
+  .hero-can {
+    position: absolute; right: 5%; top: 50%;
+    transform: translateY(-50%);
+    width: min(380px, 38vw);
+    opacity: 0; animation: can-reveal 1.2s 0.6s cubic-bezier(0.16,1,0.3,1) forwards;
+    filter: drop-shadow(0 30px 80px rgba(192,57,43,0.5));
+  }
+  @keyframes can-reveal {
+    from { opacity: 0; transform: translateY(-40%) scale(0.9) rotate(-8deg); }
+    to { opacity: 1; transform: translateY(-50%) scale(1) rotate(-4deg); }
+  }
+
+  .hero-scroll {
+    position: absolute; bottom: 40px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    font-size: 9px; letter-spacing: 4px; color: var(--text-muted);
+    opacity: 0; animation: fade-up 1s 1.4s forwards;
+  }
+  .scroll-line {
+    width: 1px; height: 48px;
+    background: linear-gradient(to bottom, var(--text-muted), transparent);
+    animation: scroll-pulse 2s ease-in-out infinite;
+  }
+  @keyframes scroll-pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* MYSTERY SECTION */
+  #mystery {
+    background: var(--cream);
+    color: var(--dark);
+    padding: 120px 8%;
+    position: relative; overflow: hidden;
+  }
+  .mystery-bg-text {
+    position: absolute; top: -40px; left: -20px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(160px, 22vw, 300px);
+    color: rgba(92,10,20,0.06);
+    line-height: 1; pointer-events: none;
+    user-select: none; white-space: nowrap;
+  }
+  .mystery-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+    position: relative; z-index: 1;
+  }
+  .mystery-label {
+    font-size: 10px; letter-spacing: 5px; text-transform: uppercase;
+    color: var(--crimson); margin-bottom: 16px;
+  }
+  .mystery-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 7vw, 96px);
+    line-height: 0.95; color: var(--burgundy);
+  }
+  .mystery-title em {
+    font-style: italic;
+    font-family: 'Playfair Display', serif;
+    color: var(--crimson);
+  }
+  .mystery-body {
+    margin-top: 24px; font-size: 16px; line-height: 1.8;
+    color: #5A4040; max-width: 420px;
+  }
+  .mystery-cta {
+    margin-top: 36px;
+    background: var(--burgundy); color: var(--cream);
+    border: none; padding: 16px 40px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    cursor: none; transition: all 0.3s;
+    display: inline-block;
+  }
+  .mystery-cta:hover { background: var(--crimson); transform: translateY(-2px); }
+
+  .flavor-bubbles {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+  }
+  .bubble {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; letter-spacing: 2px; text-align: center;
+    text-transform: uppercase;
+    cursor: none;
+    transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    position: relative; overflow: hidden;
+    font-weight: 500;
+  }
+  .bubble::before {
+    content: '?';
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px; color: inherit;
+    transition: opacity 0.3s;
+  }
+  .bubble span {
+    opacity: 0; position: relative; z-index: 1;
+    transition: opacity 0.3s; padding: 4px; line-height: 1.3;
+  }
+  .bubble:hover { transform: scale(1.15); z-index: 10; }
+  .bubble:hover::before { opacity: 0; }
+  .bubble:hover span { opacity: 1; }
+  .b1 { background: #8B1A1A; color: #F5ECD7; }
+  .b2 { background: #C04040; color: white; }
+  .b3 { background: #5C0A14; color: #E8D5A3; }
+  .b4 { background: #A0522D; color: #F5ECD7; }
+  .b5 { background: #D4A017; color: #3D0810; }
+  .b6 { background: #722F37; color: #F5ECD7; }
+  .b7 { background: #4A1A2C; color: #E8D5A3; }
+  .b8 { background: #B85C38; color: white; }
+  .b9 { background: #8B0000; color: #F5ECD7; }
+  .b10 { background: #6B4226; color: #E8D5A3; }
+  .b11 { background: #CC5500; color: white; }
+  .b12 { background: #7B2D8B; color: #F5ECD7; }
+  .b13 { background: #3D1C02; color: #E8D5A3; }
+  .b14 { background: #A52A2A; color: white; }
+  .b15 { background: #C9A96E; color: #3D0810; }
+  .b16 { background: #8E3A59; color: white; }
+  .b17 { background: #5C3317; color: #E8D5A3; }
+  .b18 { background: #BF4040; color: white; }
+  .b19 { background: #704214; color: #F5ECD7; }
+  .b20 { background: #D4956A; color: #3D0810; }
+  .b21 { background: #6B2737; color: #E8D5A3; }
+  .b22 { background: #4B0020; color: #F5ECD7; }
+  .b23 { background: #CC2200; color: white; }
+
+  /* PRODUCTS */
+  #products {
+    background: var(--dark);
+    padding: 120px 8%;
+    position: relative;
+  }
+  .section-eyebrow {
+    font-size: 10px; letter-spacing: 5px; text-transform: uppercase;
+    color: var(--metallic); margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 6vw, 80px);
+    line-height: 0.95; color: var(--cream);
+    margin-bottom: 60px;
+  }
+  .section-title em {
+    font-family: 'Playfair Display', serif;
+    font-style: italic; color: var(--crimson);
+  }
+  .products-scroll {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+  }
+  .product-card {
+    background: linear-gradient(145deg, #1A0810 0%, #0D0507 100%);
+    border: 1px solid rgba(201,169,110,0.12);
+    padding: 40px 32px;
+    position: relative; overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.34,1.3,0.64,1);
+    cursor: none;
+  }
+  .product-card::before {
+    content: ''; position: absolute;
+    inset: 0; opacity: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(192,57,43,0.15), transparent 70%);
+    transition: opacity 0.4s;
+  }
+  .product-card:hover { transform: translateY(-8px); border-color: rgba(192,57,43,0.4); }
+  .product-card:hover::before { opacity: 1; }
+  .product-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px; letter-spacing: 4px;
+    color: var(--metallic); margin-bottom: 28px;
+    opacity: 0.6;
+  }
+  .product-can-visual {
+    height: 160px; margin: 0 auto 28px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .can-svg {
+    width: 70px; height: 140px;
+    border-radius: 8px 8px 12px 12px;
+    position: relative;
+    transition: transform 0.4s ease;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  }
+  .product-card:hover .can-svg { transform: rotate(3deg) scale(1.05); }
+  .product-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px; letter-spacing: 2px;
+    color: var(--cream); margin-bottom: 8px;
+  }
+  .product-desc {
+    font-size: 13px; color: var(--text-muted);
+    line-height: 1.7; margin-bottom: 24px;
+  }
+  .product-btn {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--metallic); text-decoration: none;
+    display: flex; align-items: center; gap: 10px;
+    transition: gap 0.3s, color 0.3s;
+  }
+  .product-card:hover .product-btn { gap: 16px; color: var(--cream); }
+  .product-btn::after { content: '→'; }
+
+  /* IDENTITY */
+  #identity {
+    background: var(--burgundy);
+    padding: 160px 8%;
+    position: relative; overflow: hidden;
+    text-align: center;
+  }
+  .identity-bg {
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 40px,
+      rgba(0,0,0,0.05) 40px,
+      rgba(0,0,0,0.05) 80px
+    );
+  }
+  .identity-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-style: italic; line-height: 1.2;
+    color: var(--cream); max-width: 900px; margin: 0 auto;
+    position: relative; z-index: 1;
+  }
+  .identity-quote::before, .identity-quote::after {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 120px; color: rgba(255,255,255,0.1);
+    line-height: 0; vertical-align: -40px;
+    font-style: normal;
+  }
+  .identity-quote::before { content: '"'; margin-right: 8px; }
+  .identity-quote::after { content: '"'; margin-left: 8px; }
+  .identity-sub {
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: rgba(245,236,215,0.5); margin-top: 40px;
+    position: relative; z-index: 1;
+  }
+  .identity-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(80px, 12vw, 180px);
+    line-height: 0.88; color: var(--cream);
+    margin-bottom: 32px;
+    position: relative; z-index: 1;
+  }
+  .identity-headline .accent { color: #F5ECD7; opacity: 0.15; }
+
+  /* QUIZ */
+  #quiz {
+    background: linear-gradient(135deg, #0D0507 0%, #1A0810 100%);
+    padding: 120px 8%;
+    position: relative;
+  }
+  .quiz-wrap {
+    max-width: 700px; margin: 0 auto; text-align: center;
+  }
+  .quiz-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(201,169,110,0.2);
+    padding: 60px 52px;
+    margin-top: 48px;
+  }
+  .quiz-q {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 3vw, 30px);
+    color: var(--cream); margin-bottom: 36px;
+    font-style: italic; line-height: 1.4;
+  }
+  .quiz-options {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+  }
+  .quiz-opt {
+    background: transparent;
+    border: 1px solid rgba(245,236,215,0.15);
+    color: var(--text-muted); padding: 16px 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; letter-spacing: 1px;
+    cursor: none; transition: all 0.25s ease;
+    text-align: left;
+  }
+  .quiz-opt:hover, .quiz-opt.selected {
+    border-color: var(--crimson);
+    color: var(--cream);
+    background: rgba(192,57,43,0.1);
+  }
+  .quiz-progress {
+    display: flex; gap: 6px; justify-content: center; margin-top: 32px;
+  }
+  .qp-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%; background: rgba(255,255,255,0.15);
+    transition: background 0.3s;
+  }
+  .qp-dot.active { background: var(--crimson); }
+  .quiz-next {
+    margin-top: 32px; background: var(--crimson);
+    color: white; border: none; padding: 14px 40px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    cursor: none; transition: all 0.3s;
+    display: none;
+  }
+  .quiz-next.show { display: inline-block; }
+  .quiz-next:hover { background: var(--deep-red); transform: translateY(-2px); }
+  .quiz-result {
+    display: none;
+    padding: 40px 0;
+  }
+  .quiz-result.show { display: block; }
+  .result-flavor {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px; letter-spacing: 4px;
+    color: var(--crimson);
+  }
+  .result-desc {
+    font-size: 15px; color: var(--text-muted);
+    line-height: 1.8; margin: 16px 0 28px;
+  }
+  .result-share {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--metallic); cursor: none;
+    background: none; border: 1px solid rgba(201,169,110,0.3);
+    padding: 12px 28px;
+    transition: all 0.3s;
+  }
+  .result-share:hover { border-color: var(--metallic); color: var(--cream); }
+
+  /* SOCIAL PROOF */
+  #social {
+    background: var(--warm-white);
+    color: var(--dark); padding: 120px 8%;
+  }
+  .social-label { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--crimson); margin-bottom: 12px; }
+  .social-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 6vw, 76px); line-height: 0.95;
+    color: var(--burgundy); margin-bottom: 60px;
+  }
+  .testimonials {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+  }
+  .tcard {
+    padding: 36px; background: white;
+    border-left: 3px solid var(--crimson);
+    box-shadow: 0 4px 40px rgba(92,10,20,0.06);
+    transition: transform 0.3s;
+  }
+  .tcard:hover { transform: translateY(-4px); }
+  .tcard-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px; font-style: italic;
+    line-height: 1.7; color: #3D2020; margin-bottom: 24px;
+  }
+  .tcard-author {
+    font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--crimson);
+    font-weight: 500;
+  }
+  .tcard-handle { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+  .ugc-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 60px;
+  }
+  .ugc-item {
+    aspect-ratio: 1; position: relative; overflow: hidden;
+    background: #1A0810; cursor: none;
+  }
+  .ugc-overlay {
+    position: absolute; inset: 0;
+    background: rgba(92,10,20,0.7);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .ugc-item:hover .ugc-overlay { opacity: 1; }
+  .ugc-overlay-text { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 3px; color: var(--cream); }
+  .ugc-visual {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 48px;
+  }
+
+  /* EMAIL CAPTURE */
+  #join {
+    background: var(--dark);
+    padding: 140px 8%;
+    position: relative; overflow: hidden;
+    text-align: center;
+  }
+  .join-glow {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(139,26,26,0.3) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+  }
+  .join-eyebrow {
+    font-size: 10px; letter-spacing: 5px; text-transform: uppercase;
+    color: var(--metallic); margin-bottom: 20px; position: relative; z-index: 1;
+  }
+  .join-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 8vw, 110px); line-height: 0.9;
+    color: var(--cream); margin-bottom: 16px;
+    position: relative; z-index: 1;
+  }
+  .join-title em { color: var(--crimson); font-style: italic; font-family: 'Playfair Display', serif; }
+  .join-sub {
+    font-size: 15px; color: var(--text-muted); margin-bottom: 48px;
+    max-width: 480px; margin-left: auto; margin-right: auto;
+    line-height: 1.7; position: relative; z-index: 1;
+  }
+  .join-form {
+    display: flex; gap: 0; max-width: 500px; margin: 0 auto 48px;
+    position: relative; z-index: 1;
+  }
+  .join-input {
+    flex: 1; background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(245,236,215,0.2);
+    border-right: none;
+    color: var(--cream); padding: 18px 24px;
+    font-family: 'DM Sans', sans-serif; font-size: 14px;
+    outline: none; transition: border-color 0.3s;
+  }
+  .join-input::placeholder { color: var(--text-muted); }
+  .join-input:focus { border-color: rgba(192,57,43,0.6); }
+  .join-submit {
+    background: var(--crimson); color: white; border: none;
+    padding: 18px 32px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    cursor: none; transition: background 0.3s;
+    white-space: nowrap;
+  }
+  .join-submit:hover { background: var(--deep-red); }
+  .join-perks {
+    display: flex; gap: 32px; justify-content: center; flex-wrap: wrap;
+    position: relative; z-index: 1;
+  }
+  .perk {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 12px; letter-spacing: 1px; color: var(--text-muted);
+  }
+  .perk::before {
+    content: '✦'; color: var(--metallic); font-size: 10px;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #080205;
+    padding: 60px 8% 40px;
+    border-top: 1px solid rgba(201,169,110,0.1);
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px;
+  }
+  .footer-brand .nav-logo { font-size: 32px; display: block; margin-bottom: 16px; }
+  .footer-brand p { font-size: 13px; color: var(--text-muted); line-height: 1.7; max-width: 280px; }
+  .footer-col h4 { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--metallic); margin-bottom: 20px; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 12px; }
+  .footer-col a { font-size: 13px; color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
+  .footer-col a:hover { color: var(--cream); }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.05);
+    font-size: 11px; color: var(--text-muted);
+  }
+  .social-icons { display: flex; gap: 20px; }
+  .social-icon {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; text-decoration: none;
+    color: var(--text-muted); transition: all 0.3s; cursor: none;
+  }
+  .social-icon:hover { border-color: var(--crimson); color: var(--cream); transform: translateY(-2px); }
+
+  /* SCROLL REVEAL */
+  .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16,1,0.3,1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 18px 24px; }
+    .nav-links { display: none; }
+    .hero-can { width: 45vw; right: 2%; opacity: 0.5; }
+    .hero-content { max-width: 100%; }
+    .mystery-grid { grid-template-columns: 1fr; gap: 40px; }
+    .flavor-bubbles { grid-template-columns: repeat(4, 1fr); }
+    .products-scroll { grid-template-columns: repeat(2, 1fr); }
+    .testimonials { grid-template-columns: 1fr; }
+    .ugc-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+    .join-form { flex-direction: column; }
+    .join-input { border-right: 1px solid rgba(245,236,215,0.2); border-bottom: none; }
+  }
+  @media (max-width: 600px) {
+    .products-scroll { grid-template-columns: 1fr; }
+    .quiz-options { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .hero-ctas { flex-direction: column; }
+    .btn-primary, .btn-ghost { text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a class="nav-logo" href="#"><span>DR.</span>BOLD</a>
+  <ul class="nav-links">
+    <li><a href="#products">Flavors</a></li>
+    <li><a href="#mystery">The 23</a></li>
+    <li><a href="#quiz">Find Yours</a></li>
+    <li><a href="#social">Community</a></li>
+  </ul>
+  <button class="nav-cta">Buy Now</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-noise"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Since 1885 · The Original Bold</div>
+    <h1 class="hero-headline">One of a<br>Kind. <em>Just<br>Like You.</em></h1>
+    <p class="hero-sub">23 flavors. Zero compromises.<br>There's normal. Then there's this.</p>
+    <div class="hero-ctas">
+      <button class="btn-primary" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">Find Your Flavor</button>
+      <button class="btn-ghost" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Explore All</button>
+    </div>
+  </div>
+  <!-- Stylized Can SVG -->
+  <svg class="hero-can" viewBox="0 0 200 420" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="canGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" style="stop-color:#3D0810"/>
+        <stop offset="30%" style="stop-color:#8B1A1A"/>
+        <stop offset="55%" style="stop-color:#C0392B"/>
+        <stop offset="75%" style="stop-color:#8B1A1A"/>
+        <stop offset="100%" style="stop-color:#3D0810"/>
+      </linearGradient>
+      <linearGradient id="topGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:#D0D0D0"/>
+        <stop offset="100%" style="stop-color:#909090"/>
+      </linearGradient>
+      <linearGradient id="shineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" style="stop-color:rgba(255,255,255,0)"/>
+        <stop offset="40%" style="stop-color:rgba(255,255,255,0.12)"/>
+        <stop offset="50%" style="stop-color:rgba(255,255,255,0.25)"/>
+        <stop offset="60%" style="stop-color:rgba(255,255,255,0.12)"/>
+        <stop offset="100%" style="stop-color:rgba(255,255,255,0)"/>
+      </linearGradient>
+      <filter id="shadow">
+        <feDropShadow dx="0" dy="20" stdDeviation="15" flood-color="rgba(192,57,43,0.4)"/>
+      </filter>
+    </defs>
+    <!-- Can body -->
+    <rect x="20" y="40" width="160" height="330" rx="14" fill="url(#canGrad)" filter="url(#shadow)"/>
+    <!-- Top -->
+    <ellipse cx="100" cy="40" rx="80" ry="18" fill="url(#topGrad)"/>
+    <!-- Bottom -->
+    <ellipse cx="100" cy="370" rx="80" ry="18" fill="#707070"/>
+    <!-- Shine -->
+    <rect x="20" y="40" width="160" height="330" rx="14" fill="url(#shineGrad)"/>
+    <!-- Brand text area -->
+    <rect x="30" y="120" width="140" height="180" rx="4" fill="rgba(0,0,0,0.15)"/>
+    <!-- DR text -->
+    <text x="100" y="178" text-anchor="middle" font-family="'Bebas Neue', sans-serif" font-size="26" fill="#F5ECD7" letter-spacing="8">DR.</text>
+    <text x="100" y="220" text-anchor="middle" font-family="'Bebas Neue', sans-serif" font-size="44" fill="#F5ECD7" letter-spacing="4">BOLD</text>
+    <!-- 23 Flavors -->
+    <text x="100" y="256" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="9" fill="rgba(245,236,215,0.6)" letter-spacing="3">23 FLAVORS</text>
+    <!-- Decorative line -->
+    <line x1="50" y1="268" x2="150" y2="268" stroke="rgba(201,169,110,0.4)" stroke-width="0.5"/>
+    <!-- Tab -->
+    <rect x="85" y="20" width="30" height="8" rx="4" fill="#B0B0B0"/>
+    <circle cx="100" cy="18" r="4" fill="#909090"/>
+  </svg>
+  <div class="hero-scroll">
+    SCROLL
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- MYSTERY: 23 FLAVORS -->
+<section id="mystery">
+  <div class="mystery-bg-text">23</div>
+  <div class="mystery-grid">
+    <div>
+      <p class="mystery-label reveal">The Flavor Mystery</p>
+      <h2 class="mystery-title reveal reveal-delay-1">Can You<br>Guess <em>All<br>23?</em></h2>
+      <p class="mystery-body reveal reveal-delay-2">Every sip is a riddle wrapped in complexity. Bold. Smooth. Unexpected. We've never confirmed a single one — and we're not starting now. Hover to explore what might be hiding in every bottle.</p>
+      <button class="mystery-cta reveal reveal-delay-3" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">Explore Flavors</button>
+    </div>
+    <div class="flavor-bubbles reveal reveal-delay-1">
+      <div class="bubble b1"><span>Cherry</span></div>
+      <div class="bubble b2"><span>Caramel</span></div>
+      <div class="bubble b3"><span>Licorice</span></div>
+      <div class="bubble b4"><span>Amaretto</span></div>
+      <div class="bubble b5"><span>Vanilla</span></div>
+      <div class="bubble b6"><span>Plum</span></div>
+      <div class="bubble b7"><span>Prune</span></div>
+      <div class="bubble b8"><span>Orange Peel</span></div>
+      <div class="bubble b9"><span>Tomato</span></div>
+      <div class="bubble b10"><span>Lemon</span></div>
+      <div class="bubble b11"><span>Pepper</span></div>
+      <div class="bubble b12"><span>Juniper</span></div>
+      <div class="bubble b13"><span>Molasses</span></div>
+      <div class="bubble b14"><span>Cardamom</span></div>
+      <div class="bubble b15"><span>Clove</span></div>
+      <div class="bubble b16"><span>Sarsaparilla</span></div>
+      <div class="bubble b17"><span>Nutmeg</span></div>
+      <div class="bubble b18"><span>Birch</span></div>
+      <div class="bubble b19"><span>Ginger</span></div>
+      <div class="bubble b20"><span>Anise</span></div>
+      <div class="bubble b21"><span>Blackberry</span></div>
+      <div class="bubble b22"><span>Coriander</span></div>
+      <div class="bubble b23"><span>???</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <p class="section-eyebrow reveal">The Collection</p>
+  <h2 class="section-title reveal reveal-delay-1">Pick Your <em>Bold</em></h2>
+  <div class="products-scroll">
+    <!-- Original -->
+    <div class="product-card reveal">
+      <div class="product-num">01 / Classic</div>
+      <div class="product-can-visual">
+        <svg class="can-svg" viewBox="0 0 70 140" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="og" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#3D0810"/>
+              <stop offset="50%" style="stop-color:#8B1A1A"/>
+              <stop offset="100%" style="stop-color:#3D0810"/>
+            </linearGradient>
+          </defs>
+          <rect x="0" y="8" width="70" height="124" rx="8" fill="url(#og)"/>
+          <ellipse cx="35" cy="8" rx="35" ry="8" fill="#909090"/>
+          <ellipse cx="35" cy="132" rx="35" ry="8" fill="#707070"/>
+          <text x="35" y="62" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="10" fill="#F5ECD7" letter-spacing="1">DR.</text>
+          <text x="35" y="78" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="16" fill="#F5ECD7">BOLD</text>
+          <text x="35" y="92" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="5" fill="rgba(245,236,215,0.5)" letter-spacing="2">ORIGINAL</text>
+        </svg>
+      </div>
+      <div class="product-name">Original</div>
+      <div class="product-desc">The one that started it all. 23 flavors colliding in perfect, inexplicable harmony.</div>
+      <a class="product-btn" href="#">Try It</a>
+    </div>
+    <!-- Zero Sugar -->
+    <div class="product-card reveal reveal-delay-1">
+      <div class="product-num">02 / Zero</div>
+      <div class="product-can-visual">
+        <svg class="can-svg" viewBox="0 0 70 140" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="zs" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#0A0A0A"/>
+              <stop offset="50%" style="stop-color:#1A1A2E"/>
+              <stop offset="100%" style="stop-color:#0A0A0A"/>
+            </linearGradient>
+          </defs>
+          <rect x="0" y="8" width="70" height="124" rx="8" fill="url(#zs)"/>
+          <ellipse cx="35" cy="8" rx="35" ry="8" fill="#909090"/>
+          <ellipse cx="35" cy="132" rx="35" ry="8" fill="#707070"/>
+          <text x="35" y="62" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="10" fill="#C9A96E" letter-spacing="1">DR.</text>
+          <text x="35" y="78" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="16" fill="#C9A96E">BOLD</text>
+          <text x="35" y="92" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="5" fill="rgba(201,169,110,0.5)" letter-spacing="2">ZERO SUGAR</text>
+        </svg>
+      </div>
+      <div class="product-name">Zero Sugar</div>
+      <div class="product-desc">Same complexity, none of the guilt. Bold doesn't take shortcuts.</div>
+      <a class="product-btn" href="#">Try It</a>
+    </div>
+    <!-- Cherry -->
+    <div class="product-card reveal reveal-delay-2">
+      <div class="product-num">03 / Cherry</div>
+      <div class="product-can-visual">
+        <svg class="can-svg" viewBox="0 0 70 140" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="ch" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#6B0020"/>
+              <stop offset="50%" style="stop-color:#CC0040"/>
+              <stop offset="100%" style="stop-color:#6B0020"/>
+            </linearGradient>
+          </defs>
+          <rect x="0" y="8" width="70" height="124" rx="8" fill="url(#ch)"/>
+          <ellipse cx="35" cy="8" rx="35" ry="8" fill="#909090"/>
+          <ellipse cx="35" cy="132" rx="35" ry="8" fill="#707070"/>
+          <text x="35" y="62" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="10" fill="white" letter-spacing="1">DR.</text>
+          <text x="35" y="78" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="16" fill="white">BOLD</text>
+          <text x="35" y="92" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="5" fill="rgba(255,255,255,0.5)" letter-spacing="2">CHERRY</text>
+        </svg>
+      </div>
+      <div class="product-name">Cherry</div>
+      <div class="product-desc">Deep, dark cherry meets the original blend. Richer than you expected.</div>
+      <a class="product-btn" href="#">Try It</a>
+    </div>
+    <!-- Cream Soda -->
+    <div class="product-card reveal reveal-delay-3">
+      <div class="product-num">04 / Cream</div>
+      <div class="product-can-visual">
+        <svg class="can-svg" viewBox="0 0 70 140" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="cr" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#6B4226"/>
+              <stop offset="50%" style="stop-color:#C9A96E"/>
+              <stop offset="100%" style="stop-color:#6B4226"/>
+            </linearGradient>
+          </defs>
+          <rect x="0" y="8" width="70" height="124" rx="8" fill="url(#cr)"/>
+          <ellipse cx="35" cy="8" rx="35" ry="8" fill="#909090"/>
+          <ellipse cx="35" cy="132" rx="35" ry="8" fill="#707070"/>
+          <text x="35" y="62" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="10" fill="#3D0810" letter-spacing="1">DR.</text>
+          <text x="35" y="78" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="16" fill="#3D0810">BOLD</text>
+          <text x="35" y="92" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="5" fill="rgba(61,8,16,0.5)" letter-spacing="2">CREAM SODA</text>
+        </svg>
+      </div>
+      <div class="product-name">Cream Soda</div>
+      <div class="product-desc">Velvet smooth. Dangerously sippable. The sophisticated side of bold.</div>
+      <a class="product-btn" href="#">Try It</a>
+    </div>
+  </div>
+</section>
+
+<!-- IDENTITY -->
+<section id="identity">
+  <div class="identity-bg"></div>
+  <div class="identity-headline reveal">NOT<br><span class="accent">FOR</span><br>EVERYONE</div>
+  <blockquote class="identity-quote reveal reveal-delay-1">
+    You don't choose it. It chooses you.
+  </blockquote>
+  <p class="identity-sub reveal reveal-delay-2">You're not a basic flavor. Neither are we.</p>
+</section>
+
+<!-- FLAVOR QUIZ -->
+<section id="quiz">
+  <div class="quiz-wrap">
+    <p class="section-eyebrow reveal">Interactive Experience</p>
+    <h2 class="section-title reveal reveal-delay-1" style="color:var(--cream)">Find Your<br><em>Flavor</em></h2>
+
+    <div class="quiz-card reveal reveal-delay-2" id="quizCard">
+      <!-- Questions -->
+      <div id="quizQuestions">
+        <p class="quiz-q" id="quizQuestion">It's Friday night. What's your move?</p>
+        <div class="quiz-options" id="quizOpts">
+          <button class="quiz-opt" onclick="pickOpt(this)">Spontaneous road trip, no plan</button>
+          <button class="quiz-opt" onclick="pickOpt(this)">Rooftop with close friends</button>
+          <button class="quiz-opt" onclick="pickOpt(this)">Dark cinema, popcorn, solo</button>
+          <button class="quiz-opt" onclick="pickOpt(this)">Cooking something elaborate</button>
+        </div>
+        <div class="quiz-progress" id="quizProgress">
+          <div class="qp-dot active"></div>
+          <div class="qp-dot"></div>
+          <div class="qp-dot"></div>
+        </div>
+        <button class="quiz-next" id="quizNext" onclick="nextQuestion()">Next →</button>
+      </div>
+      <!-- Result -->
+      <div class="quiz-result" id="quizResult">
+        <p style="font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--metallic);margin-bottom:12px;">Your Flavor Match</p>
+        <div class="result-flavor" id="resultFlavor">Cherry Bold</div>
+        <p class="result-desc" id="resultDesc">You're deep, intense, and unexpected. The Cherry Bold is as complex as you are — with layers that reveal themselves slowly. You're not for everyone, and you own it.</p>
+        <button class="result-share" onclick="shareResult()">✦ Share Your Result</button>
+        <br><br>
+        <button class="btn-primary" style="margin-top:8px;">Shop Cherry Bold →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section id="social">
+  <p class="social-label reveal">The Pepper Pack Speaks</p>
+  <h2 class="social-title reveal reveal-delay-1">Real Bold.<br>Real People.</h2>
+
+  <div class="testimonials">
+    <div class="tcard reveal">
+      <p class="tcard-quote">"I thought I knew what soda was. Then I had my first sip. Now I can't explain it to anyone — and I love that about it."</p>
+      <div class="tcard-author">Marcus T.</div>
+      <div class="tcard-handle">@marcusthebold · Chicago</div>
+    </div>
+    <div class="tcard reveal reveal-delay-1">
+      <p class="tcard-quote">"23 flavors is not a marketing line. It's a life philosophy. Complex. Layered. Impossible to pin down."</p>
+      <div class="tcard-author">Aisha K.</div>
+      <div class="tcard-handle">@aishadrinks · Brooklyn</div>
+    </div>
+    <div class="tcard reveal reveal-delay-2">
+      <p class="tcard-quote">"My therapist asked what I love that I can't explain. I said this soda. She wrote something down."</p>
+      <div class="tcard-author">Dev R.</div>
+      <div class="tcard-handle">@devonrex_ · Austin</div>
+    </div>
+  </div>
+
+  <div class="ugc-grid">
+    <div class="ugc-item reveal">
+      <div class="ugc-visual" style="background:#1A0810;">🥤</div>
+      <div class="ugc-overlay"><span class="ugc-overlay-text">@boldfan_1</span></div>
+    </div>
+    <div class="ugc-item reveal reveal-delay-1">
+      <div class="ugc-visual" style="background:#2D0A18;">✨</div>
+      <div class="ugc-overlay"><span class="ugc-overlay-text">@pepperpack</span></div>
+    </div>
+    <div class="ugc-item reveal reveal-delay-2">
+      <div class="ugc-visual" style="background:#150610;">🍒</div>
+      <div class="ugc-overlay"><span class="ugc-overlay-text">@cherrycult</span></div>
+    </div>
+    <div class="ugc-item reveal reveal-delay-3">
+      <div class="ugc-visual" style="background:#1A0508;">🔥</div>
+      <div class="ugc-overlay"><span class="ugc-overlay-text">@23flavored</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN -->
+<section id="join">
+  <div class="join-glow"></div>
+  <p class="join-eyebrow">The Inner Circle</p>
+  <h2 class="join-title">Join the<br><em>Pepper</em><br>Pack</h2>
+  <p class="join-sub">Exclusive drops. Secret flavors. Merch before anyone else. You don't just drink it — you live it.</p>
+  <div class="join-form">
+    <input type="email" class="join-input" placeholder="your@email.com" id="emailInput">
+    <button class="join-submit" onclick="joinPack()">Join Now</button>
+  </div>
+  <div class="join-perks">
+    <span class="perk">Early flavor drops</span>
+    <span class="perk">Exclusive merch</span>
+    <span class="perk">Members-only giveaways</span>
+    <span class="perk">Secret content</span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a class="nav-logo" href="#"><span>DR.</span>BOLD</a>
+      <p>23 flavors. Zero compromises. The original bold soda since 1885. Still impossible to explain.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Products</h4>
+      <ul>
+        <li><a href="#">Original</a></li>
+        <li><a href="#">Zero Sugar</a></li>
+        <li><a href="#">Cherry</a></li>
+        <li><a href="#">Cream Soda</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="#">Brand Story</a></li>
+        <li><a href="#">Flavor Quiz</a></li>
+        <li><a href="#">Community</a></li>
+        <li><a href="#">Store Locator</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">TikTok</a></li>
+        <li><a href="#">Twitter / X</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Dr. Bold. All Rights Reserved.</span>
+    <div class="social-icons">
+      <a href="#" class="social-icon">𝕏</a>
+      <a href="#" class="social-icon">IG</a>
+      <a href="#" class="social-icon">TT</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+function animateCursor() {
+  cursor.style.transform = `translate(${mx-6}px, ${my-6}px)`;
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.transform = `translate(${rx-18}px, ${ry-18}px)`;
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+document.querySelectorAll('button, a, .bubble, .quiz-opt, .product-card').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.transform += ' scale(1.8)';
+    ring.style.borderColor = 'rgba(192,57,43,0.8)';
+    ring.style.width = '48px'; ring.style.height = '48px';
+  });
+  el.addEventListener('mouseleave', () => {
+    ring.style.borderColor = 'rgba(201,169,110,1)';
+    ring.style.width = '36px'; ring.style.height = '36px';
+  });
+});
+
+// Nav scroll
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+reveals.forEach(r => observer.observe(r));
+
+// Quiz logic
+const questions = [
+  {
+    q: "It's Friday night. What's your move?",
+    opts: ["Spontaneous road trip, no plan", "Rooftop with close friends", "Dark cinema, popcorn, solo", "Cooking something elaborate"]
+  },
+  {
+    q: "Pick a vibe, no second thoughts:",
+    opts: ["Smoky jazz at midnight", "Neon festival, 3AM", "Bookstore on a rainy day", "Adrenaline and bad decisions"]
+  },
+  {
+    q: "Your ideal sip is:",
+    opts: ["Punchy and intense", "Smooth and lingering", "Sweet with a sharp edge", "Complex, defies description"]
+  }
+];
+const results = [
+  { name: "Cherry Bold", desc: "You're deep, intense, and unexpected. Layers that reveal themselves slowly. Not for everyone — and you own it." },
+  { name: "Zero Sugar", desc: "Disciplined. Precise. You want the full experience without compromise. You know exactly what you want." },
+  { name: "Cream Soda", desc: "Smooth on the outside, complex underneath. You're the most underestimated person in every room." },
+  { name: "Original Bold", desc: "You ARE the original. Unreplicable. Complex. 23 things at once and somehow it all works." }
+];
+let currentQ = 0, picks = [];
+function pickOpt(btn) {
+  document.querySelectorAll('.quiz-opt').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  document.getElementById('quizNext').classList.add('show');
+}
+function nextQuestion() {
+  picks.push(1);
+  currentQ++;
+  if (currentQ >= questions.length) {
+    showResult(); return;
+  }
+  const q = questions[currentQ];
+  document.getElementById('quizQuestion').textContent = q.q;
+  const optsEl = document.getElementById('quizOpts');
+  optsEl.innerHTML = q.opts.map(o => `<button class="quiz-opt" onclick="pickOpt(this)">${o}</button>`).join('');
+  const dots = document.querySelectorAll('.qp-dot');
+  dots.forEach((d,i) => d.classList.toggle('active', i <= currentQ));
+  document.getElementById('quizNext').classList.remove('show');
+}
+function showResult() {
+  document.getElementById('quizQuestions').style.display = 'none';
+  const r = results[Math.floor(Math.random() * results.length)];
+  document.getElementById('resultFlavor').textContent = r.name;
+  document.getElementById('resultDesc').textContent = r.desc;
+  document.getElementById('quizResult').classList.add('show');
+}
+function shareResult() {
+  if(navigator.share) {
+    navigator.share({ title: 'My Dr. Bold Flavor', text: 'I got ' + document.getElementById('resultFlavor').textContent + ' — find yours!', url: window.location.href });
+  } else {
+    alert('Share: My Dr. Bold flavor is ' + document.getElementById('resultFlavor').textContent + '!');
+  }
+}
+
+// Join
+function joinPack() {
+  const val = document.getElementById('emailInput').value;
+  if(val && val.includes('@')) {
+    document.querySelector('.join-form').innerHTML = '<p style="color:var(--metallic);font-family:\'Bebas Neue\',sans-serif;font-size:28px;letter-spacing:4px;padding:18px 0;">✦ YOU\'RE IN THE PACK ✦</p>';
+  }
+}
+</script>
+</body>
+</html>
